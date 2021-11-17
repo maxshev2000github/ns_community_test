@@ -1,0 +1,19 @@
+{
+  "orgName": "Namespace Demo company",
+  "edition": "Developer",
+  "features": ["EnableSetPasswordInApi", "Communities","ServiceCloud"],
+  "settings": {
+    "lightningExperienceSettings": {
+      "enableS1DesktopEnabled": true
+    },
+    "mobileSettings": {
+      "enableS1EncryptedStoragePref2": false
+    },
+    "communitiesSettings":{
+      "enableNetworksEnabled":true
+    },
+    "experienceBundleSettings": {
+      "enableExperienceBundleMetadata": true
+  }
+  }
+}
