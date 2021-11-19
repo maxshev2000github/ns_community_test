@@ -1,0 +1,11 @@
+{
+  "activeViewId" : "6a4138d3-ec5a-4b51-8865-06b638c16456",
+  "appPageId" : "2fdcf5bd-3e08-4040-b210-f63654a06226",
+  "configurationTags" : [ ],
+  "id" : "1fffb532-2fed-418b-8dd0-6f2bb949c9fc",
+  "label" : "Quip Docs Related List",
+  "pageAccess" : "UseParent",
+  "routeType" : "extrelated-quip",
+  "type" : "route",
+  "urlPrefix" : "quip"
+}
