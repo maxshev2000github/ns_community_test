@@ -17,12 +17,7 @@ sfdx force:source:convert \
     -d mdapi-source/community \
     -n "Food-Bank"
 
-sfdx force:mdapi:retrieve \
-    -u ISVPack \
-    -p "Food-Bank" \
-    -r mdapi-source \
-    -w 10 \
-    -s
+sfdx force:mdapi:retrieve -u ISVPack -p "Food-Bank" -r mdapi-source/package -w 10 -s
 # Notes
 ## retrieve portal metadata
 sfdx force:mdapi:retrieve -r ./mdapi-source/ -u ISVPack -k ./manifest/package.xml
@@ -78,3 +73,28 @@ TYPE   FILE                                   NAME       PROBLEM
 Error  unpackaged/networks/meservice.network  meservice  In field: welcomeEmailTemplate - no EmailTemplate named unfiled$public/CommunityWelcomeEmailTemplate found
 
 ERROR running force:mdapi:deploy:  The metadata deploy operation failed.
+
+
+# Deploy to Package Org LWC component
+sfdx force:source:deploy -p force-app -u ISVPack
+
+## retrieve package metadata
+
+sfdx force:mdapi:retrieve -u ISVPack -p "Food-Bank" -r mdapi-source/package -w 10 -s
+
+# unzip package
+
+unzip ./mdapi-source/package/unpackaged.zip -d ./mdapi-source/package
+
+# convert pack to source format
+
+sfdx force:mdapi:convert -r mdapi-source/package -d force-app
+
+# create scartch org
+sfdx force:org:create -f config\\project-scratch-def.json -a scr3 -s
+# push to new scratch org
+sfdx force:source:push
+## create community from template
+sfdx force:community:create --name "meservice" --templatename "meservice" --urlpathprefix options
+## open community
+sfdx force:org:open -p _ui/networks/setup/SetupNetworksPage
