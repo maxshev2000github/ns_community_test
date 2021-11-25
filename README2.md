@@ -1,22 +1,13 @@
 sfdx force:community:create --name "meservice" --templatename "Customer Service" --urlpathprefix options
-
 sfdx force:org:create -f config/project-scratch-def.json -a scr2 -s
-
 sfdx force:source:deploy -p unpackaged
-
 sfdx force:mdapi:retrieve -r ./mdapi-source/ -u ISVPack -k ./package.xml
-
 unzip ./mdapi-source/unpackaged.zip -d ./mdapi-source/community
-
-
 sfdx force:mdapi:convert -r mdapi-source/community/unpackaged -d unpackaged
 sfdx force:mdapi:convert -r mdapi-source/community
-
-
 sfdx force:source:convert \
     -d mdapi-source/community \
     -n "Food-Bank"
-
 sfdx force:mdapi:retrieve -u ISVPack -p "Food-Bank" -r mdapi-source/package -w 10 -s
 # Notes
 ## retrieve portal metadata
@@ -75,24 +66,24 @@ Error  unpackaged/networks/meservice.network  meservice  In field: welcomeEmailT
 ERROR running force:mdapi:deploy:  The metadata deploy operation failed.
 
 
-# Deploy to Package Org LWC component
+## Deploy to Package Org LWC component
 sfdx force:source:deploy -p force-app -u ISVPack
 
 ## retrieve package metadata
 
 sfdx force:mdapi:retrieve -u ISVPack -p "Food-Bank" -r mdapi-source/package -w 10 -s
 
-# unzip package
+## unzip package
 
 unzip ./mdapi-source/package/unpackaged.zip -d ./mdapi-source/package
 
-# convert pack to source format
+## convert pack to source format
 
 sfdx force:mdapi:convert -r mdapi-source/package -d force-app
 
-# create scartch org
+## create scartch org
 sfdx force:org:create -f config\\project-scratch-def.json -a scr3 -s
-# push to new scratch org
+## push to new scratch org
 sfdx force:source:push
 ## create community from template
 sfdx force:community:create --name "meservice" --templatename "meservice" --urlpathprefix options
